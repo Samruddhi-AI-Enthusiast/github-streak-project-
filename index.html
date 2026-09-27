@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Daily Streak</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f4f4f4;
+        }
+
+        .card {
+            width: 350px;
+            padding: 30px;
+            text-align: center;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .streak {
+            font-size: 50px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        button {
+            border: none;
+            padding: 13px 22px;
+            border-radius: 10px;
+            background: #24292f;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        #message {
+            margin-top: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>🔥 GitHub Streak</h1>
+
+        <p class="subtitle">Keep coding every day!</p>
+
+        <div class="streak">
+            <span id="streak">0</span> days
+        </div>
+
+        <button onclick="completeToday()">
+            I Coded Today 🚀
+        </button>
+
+        <p id="message">Start your streak today!</p>
+    </div>
+
+    <script>
+        let streak = Number(localStorage.getItem("streak")) || 0;
+        let lastDate = localStorage.getItem("lastDate");
+
+        document.getElementById("streak").textContent = streak;
+
+        function completeToday() {
+            const today = new Date().toDateString();
+
+            if (lastDate === today) {
+                document.getElementById("message").textContent =
+                    "✅ Already completed today!";
+                return;
+            }
+
+            streak++;
+            lastDate = today;
+
+            localStorage.setItem("streak", streak);
+            localStorage.setItem("lastDate", lastDate);
+
+            document.getElementById("streak").textContent = streak;
+            document.getElementById("message").textContent =
+                "🔥 Great job! Keep the streak alive!";
+        }
+    </script>
+
+</body>
+</html>
